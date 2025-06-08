@@ -37,13 +37,15 @@ void UHttpServerComponent::BeginPlay()
 
 void UHttpServerComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+
+    Super::EndPlay(EndPlayReason);
+
     if (HttpRouter.IsValid())
     {
         HttpRouter->UnbindRoute(RouteHandle);
         UE_LOG(LogTemp, Log, TEXT("HTTP route unbound"));
     }
 
-    Super::EndPlay(EndPlayReason);
 }
 
 bool UHttpServerComponent::HandleRequest(const FHttpServerRequest& Request, const FHttpResultCallback& OnComplete)
